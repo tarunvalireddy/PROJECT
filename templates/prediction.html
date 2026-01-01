@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Price Prediction</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Heroicons for arrows -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/heroicons/2.1.1/heroicons.min.js"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        h2 { font-family: 'Orbitron', sans-serif; }
+        .animate-pulse-slow { animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-gray-900 via-purple-900 to-black min-h-screen flex items-center justify-center px-4 py-12">
+    <div class="w-full max-w-md">
+        <!-- Main Card -->
+        <div class="bg-white/10 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden border border-white/20">
+            <!-- Header -->
+            <div class="bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-8 py-10 text-center">
+                <h2 class="text-4xl font-bold">Crypto Price Prediction</h2>
+                <p class="mt-3 text-cyan-100 text-lg">Powered by Advanced ML Models</p>
+            </div>
+
+            <!-- Form Body -->
+            <div class="px-8 py-10">
+                <form method="post" enctype="multipart/form-data" class="space-y-8">
+                    {% csrf_token %}
+
+                    <!-- Select Cryptocurrency -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-3">
+                            Select Preloaded Cryptocurrency
+                        </label>
+                        <select name="coin" class="w-full px-5 py-4 bg-white/5 border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition">
+                            <option value="" class="text-gray-500">-- Select Coin --</option>
+                            <option value="coin_Bitcoin.csv">Bitcoin (BTC)</option>
+                            <option value="coin_Ethereum.csv">Ethereum (ETH)</option>
+                            <option value="coin_Dogecoin.csv">Dogecoin (DOGE)</option>
+                            <option value="coin_Litecoin.csv">Litecoin (LTC)</option>
+                        </select>
+                    </div>
+
+                    <!-- OR Divider -->
+                    <div class="relative text-center">
+                        <div class="absolute inset-0 flex items-center">
+                            <div class="w-full border-t border-white/20"></div>
+                        </div>
+                        <div class="relative inline-block px-4 bg-gray-900/50 text-gray-400 font-medium">OR</div>
+                    </div>
+
+                    <!-- Upload CSV -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-3">
+                            Upload Your Own CSV Dataset
+                        </label>
+                        <input type="file" name="csv_file" accept=".csv"
+                               class="block w-full text-sm text-gray-300 file:mr-4 file:py-3 file:px-6 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-cyan-500/20 file:text-cyan-300 hover:file:bg-cyan-500/30 backdrop-blur-sm">
+                    </div>
+
+                    <!-- Predict Button -->
+                    <button type="submit"
+                            class="w-full bg-gradient-to-r from-cyan-500 to-purple-600 text-white font-bold text-xl py-5 rounded-xl hover:from-cyan-600 hover:to-purple-700 transform hover:scale-105 transition duration-300 shadow-xl animate-pulse-slow">
+                        Predict Next Price
+                    </button>
+                </form>
+
+                <!-- Results Section -->
+                {% if predicted_price %}
+                <div class="mt-10 pt-8 border-t border-white/20">
+                    <h3 class="text-xl font-semibold text-gray-200 mb-6 text-center">Prediction Results</h3>
+                    <div class="space-y-5 text-lg">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">Last Close Price</span>
+                            <span class="font-bold text-white">${{ last_price }}</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">Predicted Next Price</span>
+                            <span class="font-bold text-2xl text-cyan-300">${{ predicted_price }}</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">Trend</span>
+                            <div class="flex items-center gap-3">
+                                <span class="font-bold text-xl {% if 'Up' in trend %}text-emerald-400{% else %}text-red-400{% endif %}">
+                                    {{ trend }}
+                                </span>
+                                {% if 'Up' in trend %}
+                                    <svg class="w-8 h-8 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                {% else %}
+                                    <svg class="w-8 h-8 text-red-400" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M14.707 10.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 12.586V5a1 1 0 112 0v7.586l2.293-2.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <p class="text-center text-white/50 mt-8 text-sm">
+            © 2026 Crypto AI Predictor • Accurate Forecasts Powered by LSTM & XGBoost
+        </p>
+    </div>
+</body>
+</html>

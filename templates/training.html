@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Training Results</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Heroicons for checkmarks (optional, but nice) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/heroicons/2.1.1/heroicons.min.js"></script>
+    <!-- Google Fonts for modern typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900 min-h-screen flex items-center justify-center px-4 py-12">
+    <div class="w-full max-w-md animate-fade-in">
+        <!-- Success Card -->
+        <div class="bg-white/10 backdrop-blur-lg rounded-3xl shadow-2xl overflow-hidden border border-white/20">
+            <!-- Header with Success Badge -->
+            <div class="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-8 py-10 text-center">
+                <div class="flex justify-center mb-4">
+                    <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold">Training Completed Successfully!</h2>
+                <p class="mt-2 text-teal-100">Your models are ready for prediction.</p>
+            </div>
+
+            <!-- Results Body -->
+            <div class="px-8 py-10 text-white">
+                <dl class="space-y-6">
+                    <div class="flex justify-between items-center">
+                        <dt class="text-lg font-medium text-gray-300">Cryptocurrency</dt>
+                        <dd class="text-xl font-bold">{{ coin }}</dd>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <dt class="text-lg font-medium text-gray-300">Epochs Trained</dt>
+                        <dd class="text-xl font-bold">{{ epochs }}</dd>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <dt class="text-lg font-medium text-gray-300">MAPE</dt>
+                        <dd class="text-xl font-semibold text-amber-300">{{ mape }}</dd>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <dt class="text-lg font-medium text-gray-300">RMSE</dt>
+                        <dd class="text-xl font-semibold text-amber-300">{{ rmse }}</dd>
+                    </div>
+                    <div class="flex justify-between items-center border-t border-white/20 pt-6">
+                        <dt class="text-lg font-medium text-gray-300">Price Accuracy</dt>
+                        <dd class="text-3xl font-extrabold text-emerald-400">{{ price_accuracy }}%</dd>
+                    </div>
+                </dl>
+
+                <hr class="my-8 border-white/20">
+
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 text-gray-200">Saved Models</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-3">
+                            <svg class="w-6 h-6 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-gray-200">lstm_model.h5</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <svg class="w-6 h-6 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-gray-200">xgboost_model.save</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <svg class="w-6 h-6 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-gray-200">scaler.save</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Optional Footer -->
+        <p class="text-center text-white/60 mt-8 text-sm">
+            © 2026 Crypto AI Predictor. All models saved securely.
+        </p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!-- templates/admin_home.html -->
+{% extends "base.html" %}
+{% block title %}Admin Home • UMS{% endblock %}
+
+{% block content %}
+
+<div class="min-h-screen bg-gradient-to-br from-purple-600 via-pink-500 to-red-500 flex items-center justify-center px-6 py-16">
+
+    <!-- Main Admin Card -->
+    <div class="max-w-4xl w-full">
+        
+        <!-- Welcome Section -->
+        <div class="text-center mb-16">
+            <div class="inline-flex items-center justify-center w-32 h-32 bg-white/20 backdrop-blur-lg rounded-3xl shadow-2xl border-4 border-white/30 mb-8">
+                <span class="text-6xl font-black text-white drop-shadow-2xl">A</span>
+            </div>
+            
+            <h1 class="text-6xl md:text-7xl font-extrabold text-white drop-shadow-2xl">
+                Welcome, <span class="text-yellow-300">Admin</span>!
+            </h1>
+            <p class="mt-6 text-xl md:text-2xl text-white/90 font-medium">
+                You now have <span class="underline decoration-yellow-300">full control</span> of the system
+            </p>
+        </div>
+
+        <!-- Action Buttons Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-2xl mx-auto">
+
+            <!-- Go to Dashboard -->
+            <a href="{% url 'admin_dashboard' %}" 
+               class="group relative overflow-hidden rounded-3xl bg-white shadow-2xl transform hover:scale-105 transition-all duration-300">
+                <div class="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition"></div>
+                <div class="relative p-10 text-center">
+                    <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-purple-600 to-pink-600 rounded-2xl flex items-center justify-center text-white text-4xl font-black shadow-xl">
+                        D
+                    </div>
+                    <h3 class="text-3xl font-bold text-gray-800 group-hover:text-white transition">
+                        User Dashboard
+                    </h3>
+                    <p class="mt-3 text-gray-600 group-hover:text-white/90 transition">
+                        View, activate, deactivate & delete users
+                    </p>
+                    <span class="mt-6 inline-block text-purple-600 font-bold group-hover:text-white text-lg">
+                        Enter Dashboard →
+                    </span>
+                </div>
+            </a>
+
+            <!-- Logout -->
+            <a href="{% url 'user_logout' %}" 
+               class="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-red-600 to-rose-700 shadow-2xl transform hover:scale-105 transition-all duration-300">
+                <div class="p-10 text-center text-white">
+                    <div class="w-20 h-20 mx-auto mb-6 bg-white/20 backdrop-blur-lg rounded-2xl flex items-center justify-center text-5xl font-black">
+                        Exit
+                    </div>
+                    <h3 class="text-3xl font-bold">Logout</h3>
+                    <p class="mt-3 opacity-90">Securely end admin session</p>
+                    <span class="mt-6 inline-block font-bold text-lg">
+                        Logout Now →
+                    </span>
+                </div>
+            </a>
+
+        </div>
+
+        <!-- Footer Note -->
+        <div class="text-center mt-16">
+            <p class="text-white/80 text-lg font-medium">
+                Logged in as <span class="text-yellow-300 font-bold">{{ user.username }}</span> • Admin Mode Active
+            </p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

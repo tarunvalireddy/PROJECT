@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="min-h-screen bg-gradient-to-br from-indigo-500 via-purple-600 to-pink-500 flex items-center justify-center px-4">
+    <div class="w-full max-w-md">
+        <!-- Login Card -->
+        <div class="bg-white rounded-2xl shadow-2xl overflow-hidden">
+            <!-- Header -->
+            <div class="bg-gradient-to-r from-indigo-600 to-purple-700 text-white px-8 py-10 text-center">
+                <h2 class="text-3xl font-bold">Admin Login</h2>
+                <p class="mt-2 text-indigo-100">Welcome back! Please login to your account.</p>
+            </div>
+
+            <!-- Form -->
+            <div class="px-8 py-10">
+                <!-- Error Message -->
+                {% if msg %}
+                    <div class="mb-6 p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg text-sm">
+                        {{ msg }}
+                    </div>
+                {% endif %}
+
+                <form method="post" class="space-y-6">
+                    {% csrf_token %}
+                    
+                    <!-- Name Field -->
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
+                            Username
+                        </label>
+                        <input 
+                            type="text" 
+                            name="name" 
+                            id="name"
+                            required
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
+                            placeholder="Enter your username"
+                        >
+                    </div>
+
+                    <!-- Password Field -->
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
+                            Password
+                        </label>
+                        <input 
+                            type="password" 
+                            name="password" 
+                            id="password"
+                            required
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
+                            placeholder="Enter your password"
+                        >
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div>
+                        <button 
+                            type="submit"
+                            class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold py-3 px-6 rounded-lg hover:from-indigo-700 hover:to-purple-700 transform hover:scale-105 transition duration-200 shadow-lg"
+                        >
+                            Login
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Optional Footer Links -->
+                <div class="mt-8 text-center text-sm text-gray-600">
+                    <p>Secure Admin Panel Access</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Optional Credit -->
+        <p class="text-center text-white mt-8 text-sm opacity-80">
+            © 2026 Your Company. All rights reserved.
+        </p>
+    </div>
+</div>
+
+{% endblock %}

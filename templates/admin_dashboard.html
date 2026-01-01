@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <!-- Tailwind CSS CDN (for production, use a proper build) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Optional: Google Fonts for better typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+    <div class="container mx-auto px-4 py-8 max-w-7xl">
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <!-- Header -->
+            <div class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-8">
+                <h2 class="text-3xl font-bold">Admin Dashboard - User Management</h2>
+                <div class="mt-4 flex flex-wrap gap-4">
+                    <a href="{% url 'admin_home' %}" class="bg-white text-indigo-600 px-5 py-2 rounded-lg font-medium hover:bg-gray-100 transition">
+                        Back to Home
+                    </a>
+                    <a href="{% url 'user_logout' %}" class="bg-transparent border border-white px-5 py-2 rounded-lg font-medium hover:bg-white hover:text-indigo-600 transition">
+                        Logout
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table -->
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm text-left">
+                    <thead class="text-xs uppercase bg-gray-50 text-gray-700">
+                        <tr>
+                            <th class="px-6 py-4">Name</th>
+                            <th class="px-6 py-4">Email</th>
+                            <th class="px-6 py-4">Mobile</th>
+                            <th class="px-6 py-4">Image</th>
+                            <th class="px-6 py-4">Status</th>
+                            <th class="px-6 py-4">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        {% for user in users %}
+                        <tr class="hover:bg-gray-50 transition">
+                            <td class="px-6 py-4 font-medium text-gray-900">{{ user.name }}</td>
+                            <td class="px-6 py-4 text-gray-600">{{ user.email }}</td>
+                            <td class="px-6 py-4 text-gray-600">{{ user.mobile }}</td>
+                            <td class="px-6 py-4">
+                                <img src="{{ user.image.url }}" alt="{{ user.name }}" class="w-12 h-12 rounded-full object-cover border-2 border-gray-200">
+                            </td>
+                            <td class="px-6 py-4">
+                                {% if user.is_active %}
+                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                        Active
+                                    </span>
+                                {% else %}
+                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                        Inactive
+                                    </span>
+                                {% endif %}
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="flex items-center gap-3">
+                                    {% if not user.is_active %}
+                                        <a href="{% url 'activate_user' user.id %}" class="text-green-600 hover:text-green-800 font-medium">
+                                            Activate
+                                        </a>
+                                    {% else %}
+                                        <a href="{% url 'deactivate_user' user.id %}" class="text-orange-600 hover:text-orange-800 font-medium">
+                                            Deactivate
+                                        </a>
+                                    {% endif %}
+                                    <span class="text-gray-300">|</span>
+                                    <a href="{% url 'delete_user' user.id %}" class="text-red-600 hover:text-red-800 font-medium"
+                                       onclick="return confirm('Are you sure you want to delete this user?')">
+                                        Delete
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="6" class="px-6 py-8 text-center text-gray-500">No users found.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Optional Footer (e.g., pagination if added later) -->
+            <div class="bg-gray-50 px-6 py-4 text-center text-sm text-gray-600">
+                Total Users: {{ users|length }}
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,128 @@
+{% extends "users/user_base.html" %}
+{% load static %}
+
+{% block title %}Verify Evidence - Digital Evidence Management System{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+            <div class="card-header bg-primary text-white text-center py-4">
+                <i class="fas fa-check-circle fa-2x mb-2"></i>
+                <h2 class="mb-0 fw-bold">Verify Evidence File</h2>
+                <p class="mb-0 opacity-75">Upload a file to check its integrity against the stored SHA-256 hash</p>
+            </div>
+            <div class="card-body p-5">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    <div class="mb-4">
+                        <label for="file" class="form-label fw-semibold">
+                            <i class="fas fa-file me-2 text-primary"></i>Select File to Verify
+                        </label>
+                        <input type="file" class="form-control form-control-lg" id="file" name="file" required accept=".jpg,.jpeg,.png,.pdf,.doc,.docx">
+                        <div class="form-text">Upload the exact file to verify its authenticity. Supported formats: Images (JPG, PNG), Documents (PDF, DOC, DOCX).</div>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg fw-semibold">
+                            <i class="fas fa-search me-2"></i>Verify Integrity
+                        </button>
+                    </div>
+                </form>
+
+                {% if result %}
+                <div class="mt-4 pt-3 border-top">
+                    <!-- Alert Message -->
+                    {% if result.message %}
+                        {% if 'Match' in result.message %}
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <i class="fas fa-check-circle me-2"></i>
+                                {{ result.message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        {% else %}
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <i class="fas fa-exclamation-triangle me-2"></i>
+                                {{ result.message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+
+                    <!-- Evidence Details -->
+                    {% if result.evidence %}
+                    <div class="card border-0 shadow-sm rounded-3 mt-3">
+                        <div class="card-header bg-light">
+                            <h5 class="mb-0 fw-bold text-primary">
+                                <i class="fas fa-file-signature me-2"></i>Evidence Details
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span><i class="fas fa-file me-2 text-primary"></i><strong>File Name:</strong></span>
+                                    <span>{{ result.evidence.file_name }}</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span><i class="fas fa-user me-2 text-primary"></i><strong>Uploaded By:</strong></span>
+                                    <span>{{ result.evidence.uploaded_by.name }}</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span><i class="fas fa-clock me-2 text-primary"></i><strong>Uploaded At:</strong></span>
+                                    <span>{{ result.evidence.uploaded_at }}</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span><i class="fas fa-key me-2 text-primary"></i><strong></strong></span>
+                                    <span class="text-monospace small">{{ result.evidence.hash_key }}</span>
+                                </li>
+                                {% comment %} <li class="list-group-item">
+                                    <strong>Preview:</strong><br>
+                                    <img src="{{ result.evidence.file.url }}" width="200" alt="Evidence Preview">
+                                </li> {% endcomment %}
+                            </ul>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div class="text-center mt-4">
+                    <p class="mb-0 text-muted">Want to upload new evidence? 
+                        <a href="{% url 'upload_evidence' %}" class="text-primary fw-semibold">Upload Evidence</a>
+                    </p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+    }
+    .form-control:focus {
+        border-color: #0d47a1;
+        box-shadow: 0 0 0 0.25rem rgba(13, 71, 161, 0.25);
+    }
+    .btn-primary {
+        background-color: #0d47a1;
+        border-color: #0d47a1;
+    }
+    .btn-primary:hover {
+        background-color: #1976d2;
+        border-color: #1976d2;
+    }
+    .rounded-4 {
+        border-radius: 1rem;
+    }
+    .list-group-item {
+        border: none;
+        padding: 1rem 0;
+        border-bottom: 1px solid #dee2e6;
+    }
+    .list-group-item:last-child {
+        border-bottom: none;
+    }
+</style>
+{% endblock %}

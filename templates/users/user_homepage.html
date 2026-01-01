@@ -1,0 +1,17 @@
+{% extends 'users/user_base.html' %}
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Home Page</title>
+</head>
+<body>
+    <h1>Welcome, {{ user_name }}!</h1>
+    <img src="{{ user_image }}" alt="User Image" width="150" height="150" style="border-radius:50%;"><br><br>
+    <p>Login time: {{ login_time }}</p>
+
+</body>
+</html>
+
+{% endblock %}

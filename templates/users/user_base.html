@@ -1,0 +1,152 @@
+<!-- templates/user_base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Crypto Kingdom - User Panel{% endblock %}</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&display=swap');
+
+        body {
+            font-family: 'Cinzel', serif;
+            background-image: url('https://cdn.itoosoft.com/media/cache/news_full/5c1a0c0150641/makuta_baahubali_07.jpg?version=v215');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #FFD700; /* Royal Gold */
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        /* Dark overlay for readability */
+        .overlay {
+            background-color: rgba(0, 0, 0, 0.6);
+            min-height: 100vh;
+        }
+
+        /* Epic Navigation Sidebar */
+        nav {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 280px;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 40px 20px;
+            box-shadow: 8px 0 20px rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            text-align: center;
+        }
+
+        nav h2 {
+            font-size: 2.5em;
+            margin-bottom: 60px;
+            text-shadow: 0 0 10px #FFD700;
+            animation: glow 2s infinite alternate;
+        }
+
+        nav a {
+            display: block;
+            color: #FFD700;
+            font-size: 1.4em;
+            font-weight: bold;
+            padding: 20px;
+            margin: 15px 0;
+            text-decoration: none;
+            border: 2px solid transparent;
+            border-radius: 10px;
+            transition: all 0.4s ease;
+            background-color: rgba(139, 0, 0, 0.4); /* Deep red warrior vibe */
+        }
+
+        nav a:hover {
+            background-color: #8B0000;
+            border-color: #FFD700;
+            transform: scale(1.05);
+            box-shadow: 0 0 20px #FFD700;
+        }
+
+        /* Main Content Area */
+        .main-content {
+            margin-left: 300px;
+            padding: 40px;
+        }
+
+        header {
+            text-align: center;
+            padding: 80px 20px 40px;
+        }
+
+        header h1 {
+            font-size: 4em;
+            text-shadow: 3px 3px 10px #000;
+        }
+
+        header p {
+            font-size: 1.5em;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+
+        /* Content Block */
+        .content {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+            margin-bottom: 50px;
+            animation: slideIn 1s ease-out;
+        }
+
+        /* Animations */
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #FFD700; }
+            to { text-shadow: 0 0 20px #FFD700, 0 0 30px #FF8C00; }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            font-size: 1em;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay">
+        <nav>
+            <h2>⚔️ Crypto Kingdom</h2>
+            <a href="{% url 'user_homepage' %}">🏠 Dashboard</a>
+            <a href="{% url 'training' %}">📊 Model Training</a>
+            <a href="{% url 'predict' %}">🔮 Price Prediction</a>
+            <a href="{% url 'user_logout' %}">🚪 Logout</a>
+        </nav>
+
+        <div class="main-content">
+            <header>
+                <h1>LSTM + XGBoost Empire</h1>
+                <p>Command the power of hybrid deep learning to conquer cryptocurrency price prediction!</p>
+            </header>
+
+            <div class="content">
+                {% block content %}
+                <!-- Child templates will fill this -->
+                <h2>Welcome, Warrior Trader</h2>
+                <p>Enter your domain: Train powerful models, predict future prices of Bitcoin, Ethereum, and more with the hybrid LSTM+XGBoost architecture from the epic research.</p>
+                {% endblock %}
+            </div>
+
+            <footer>
+                &copy; 2026 Crypto Kingdom | Forged with LSTM + XGBoost Might
+            </footer>
+        </div>
+    </div>
+</body>
+</html>
