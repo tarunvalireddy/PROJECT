@@ -21,5 +21,5 @@ COPY . .
 
 EXPOSE 8000
 
-CMD [ "python3","manage.py","runserver","0.0.0.0:8000" ]
+CMD [ "/usr/local/bin/gunicorn","CRYPTO_PRICE_PREDICTION_USING_LSTM_XGBOOST.wsgi:application","--bind","0.0.0.0:8000" ]
     

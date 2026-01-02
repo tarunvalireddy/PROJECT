@@ -7,5 +7,6 @@ scikit-learn
 tensorflow
 xgboost
 vaderSentiment
+gunicorn
 
 
