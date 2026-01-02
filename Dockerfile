@@ -1,13 +1,23 @@
-FROM python:3.11.2
+FROM python:3.11-slim AS build
 
 WORKDIR /APP
 
-COPY requirements.txt /APP
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
 
-RUN sudo apt install python3.11-venv \
-    && python3 -m venv venv \
-    && source venv/bin/activate \
-    && pip install -r requirements.txt --no-cache-dir
+COPY requirements.txt .
+
+RUN  pip install --upgrade pip \
+     &&  pip install --no-cache-dir --prefix=/install -r requirements.txt
+
+FROM gcr.io/distroless/python3
+
+WORKDIR /APP
+
+COPY --from=build /install /usr/local
+
+COPY . .
 
 EXPOSE 8000
 
