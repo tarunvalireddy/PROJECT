@@ -1,18 +1,86 @@
 {% extends "base.html" %}
+
 {% block content %}
+<div class="min-h-screen flex items-center justify-center bg-black px-6">
+    <div class="w-full max-w-3xl text-yellow-400">
 
+        <!-- Title -->
+        <h1 class="text-center text-4xl md:text-5xl font-bold tracking-wide mb-6 glow-text">
+            USER REGISTRATION
+        </h1>
 
-<h2>User Registration</h2>
-{% if msg %}
-  <p style="color:green;">{{ msg }}</p>
-{% endif %}
-<form method="post" enctype="multipart/form-data">
-  {% csrf_token %}
-  Name: <input type="text" name="name"><br><br>
-  Email: <input type="email" name="email"><br><br>
-  Mobile: <input type="text" name="mobile"><br><br>
-  Password: <input type="password" name="password"><br><br>
-  Image: <input type="file" name="image"><br><br>
-  <button type="submit">Register</button>
-</form>
+        <!-- Divider -->
+        <div class="w-full h-[2px] bg-yellow-400 mb-12"></div>
+
+        <!-- Success Message -->
+        {% if msg %}
+            <p class="text-green-400 text-center mb-6">
+                {{ msg }}
+            </p>
+        {% endif %}
+
+        <!-- Form -->
+        <form method="post" enctype="multipart/form-data"
+              class="space-y-6 max-w-md mx-auto">
+            {% csrf_token %}
+
+            <!-- Name -->
+            <div class="flex items-center gap-4">
+                <label class="w-32 font-semibold">Name:</label>
+                <input type="text" name="name" required
+                       class="flex-1 px-4 py-2 bg-white text-black rounded-md
+                              focus:outline-none focus:ring-2 focus:ring-yellow-400">
+            </div>
+
+            <!-- Email -->
+            <div class="flex items-center gap-4">
+                <label class="w-32 font-semibold">Email:</label>
+                <input type="email" name="email" required
+                       class="flex-1 px-4 py-2 bg-white text-black rounded-md
+                              focus:outline-none focus:ring-2 focus:ring-yellow-400">
+            </div>
+
+            <!-- Mobile -->
+            <div class="flex items-center gap-4">
+                <label class="w-32 font-semibold">Mobile:</label>
+                <input type="text" name="mobile" required
+                       class="flex-1 px-4 py-2 bg-white text-black rounded-md
+                              focus:outline-none focus:ring-2 focus:ring-yellow-400">
+            </div>
+
+            <!-- Password -->
+            <div class="flex items-center gap-4">
+                <label class="w-32 font-semibold">Password:</label>
+                <input type="password" name="password" required
+                       class="flex-1 px-4 py-2 bg-white text-black rounded-md
+                              focus:outline-none focus:ring-2 focus:ring-yellow-400">
+            </div>
+
+            <!-- Image Upload -->
+            <div class="flex items-center gap-4">
+                <label class="w-32 font-semibold">Image:</label>
+                <input type="file" name="image" required
+                       class="flex-1 text-white file:bg-yellow-400 file:text-black
+                              file:px-4 file:py-2 file:rounded-md file:border-0
+                              file:cursor-pointer">
+            </div>
+
+            <!-- Register Button -->
+            <div class="mt-10">
+                <button type="submit"
+                        class="text-yellow-400 font-semibold hover:underline transition">
+                    REGISTER
+                </button>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<!-- Glow Effect -->
+<style>
+.glow-text {
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+}
+</style>
 {% endblock %}

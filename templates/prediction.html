@@ -32,18 +32,51 @@
                     {% csrf_token %}
 
                     <!-- Select Cryptocurrency -->
-                    <div>
-                        <label class="block text-sm font-medium text-gray-300 mb-3">
-                            Select Preloaded Cryptocurrency
-                        </label>
-                        <select name="coin" class="w-full px-5 py-4 bg-white/5 border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition">
-                            <option value="" class="text-gray-500">-- Select Coin --</option>
-                            <option value="coin_Bitcoin.csv">Bitcoin (BTC)</option>
-                            <option value="coin_Ethereum.csv">Ethereum (ETH)</option>
-                            <option value="coin_Dogecoin.csv">Dogecoin (DOGE)</option>
-                            <option value="coin_Litecoin.csv">Litecoin (LTC)</option>
-                        </select>
-                    </div>
+<div>
+    <label class="block text-sm font-medium text-gray-300 mb-3">
+        Select Preloaded Cryptocurrency
+    </label>
+
+    <select name="coin"
+        class="w-full px-5 py-4 bg-white/5 border border-white/20 rounded-xl
+               text-white focus:outline-none focus:ring-2 focus:ring-cyan-500
+               focus:border-transparent transition">
+
+        <option value="" class="text-gray-600 bg-white">
+            -- Select Coin --
+        </option>
+
+        <option value="coin_Bitcoin.csv" class="text-black bg-white">
+            Bitcoin (BTC)
+        </option>
+        <option value="coin_Ethereum.csv" class="text-black bg-white">
+            Ethereum (ETH)
+        </option>
+        <option value="coin_Dogecoin.csv" class="text-black bg-white">
+            Dogecoin (DOGE)
+        </option>
+        <option value="coin_Litecoin.csv" class="text-black bg-white">
+            Litecoin (LTC)
+        </option>
+        <option value="coin_Solana.csv" class="text-black bg-white">
+            Solana (SOL)
+        </option>
+        <option value="coin_Tether.csv" class="text-black bg-white">
+            Tether (USDT)
+        </option>
+        <option value="coin_USDC.csv" class="text-black bg-white">
+            USD Coin (USDC)
+        </option>
+        <option value="coin_XRP.csv" class="text-black bg-white">
+            XRP (XRP)
+        </option>
+        <option value="coin_Binance.csv" class="text-black bg-white">
+            Binance Coin (BNB)
+        </option>
+
+    </select>
+</div>
+
 
                     <!-- OR Divider -->
                     <div class="relative text-center">

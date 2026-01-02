@@ -4,4 +4,6 @@ pandas
 joblib
 scikit-learn
 tensorflow
+xgboost
+
 
