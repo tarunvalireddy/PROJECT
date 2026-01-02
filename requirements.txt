@@ -1,3 +1,4 @@
+django
 pytz
 numpy
 pandas
@@ -5,5 +6,6 @@ joblib
 scikit-learn
 tensorflow
 xgboost
+vaderSentiment
 
 
