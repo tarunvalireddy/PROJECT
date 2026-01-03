@@ -1,121 +1,112 @@
-# Crypto Price Prediction Using LSTM & XGBoost
 
-This is a Django-based web application for predicting cryptocurrency prices using Machine Learning models such as **LSTM** and **XGBoost**.  
-The application can be run either **locally** or **inside a Docker container using Gunicorn**.
+```
+# Crypto Price Predictor
 
----
+This project uses LSTM and XGBoost to predict cryptocurrency prices. Follow the instructions below to set up the environment and run the application.
 
-## Requirements
+## Local Setup
 
-### For Local Development
-- Python 3.10+
-- pip
-- virtualenv
-
-### For Container Execution
-- Docker
-
----
-
-## Local Development (Without Docker)
-
-### 1. Clone the project
+### 1. Clone the Repository
 ```bash
 git clone <repository-url>
 cd PROJECT
 
+```
 
-2. Create and activate virtual environment
+### 2. Create and Activate Virtual Environment
 
-Linux / macOS
+**Linux / macOS:**
 
-
+```bash
 python3 -m venv venv
 source venv/bin/activate
 
+```
 
-Windows
+**Windows:**
 
+```bash
 python -m venv venv
 venv\Scripts\activate
 
-3. Install dependencies
+```
+
+### 3. Install Dependencies
+
+```bash
 pip install -r requirements.txt
 
-4. Apply migrations
+```
+
+### 4. Database & Execution
+
+```bash
+# Apply migrations
 python manage.py migrate
 
-5. Run the application
+# Run the application
 python manage.py runserver 0.0.0.0:8000
 
-6. Access the app
-http://127.0.0.1:8000
+```
 
+**Access the app at:** [http://127.0.0.1:8000](http://127.0.0.1:8000)
 
-Docker Container Execution
-1. Build the Docker image
+---
+
+## Docker Container Execution
+
+### 1. Build and Run
+
+```bash
+# Build the Docker image
 docker build -t crypto-price-predictor .
 
-2. Run the container
+# Run the container
 docker run -d -p 8000:8000 crypto-price-predictor
 
-3. Access the app
-http://localhost:8000
+```
 
+### 2. Accessing the Application
 
-or (on EC2)
+* **Local:** [http://localhost:8000](https://www.google.com/search?q=http://localhost:8000)
+* **EC2:** `http://<EC2_PUBLIC_IP>:8000`
 
-http://<EC2_PUBLIC_IP>:8000
+### 3. Application Server
 
-Application Server
+The application runs using **Gunicorn** inside the container:
 
-The application runs using Gunicorn inside the container:
-
+```bash
 gunicorn CRYPTO_PRICE_PREDICTION_USING_LSTM_XGBOOST.wsgi:application \
 --bind 0.0.0.0:8000
 
-Important Notes
+```
 
-Do not use Django runserver in production
+---
 
-Configure ALLOWED_HOSTS correctly in settings.py
+## Tech Stack
 
-Use Nginx in front of Gunicorn for ports 80/443
+* **Framework:** Django
+* **ML Libraries:** TensorFlow, XGBoost, Scikit-learn
+* **Server/Deployment:** Gunicorn, Docker
+* **Language:** Python 3.11
 
-Store secrets using environment variables
+---
 
-Useful Docker Commands
+## Useful Docker Commands
 
-View running containers:
+* **View running containers:** `docker ps`
+* **View logs:** `docker logs <container_id>`
+* **Stop container:** `docker stop <container_id>`
 
-docker ps
+---
 
+## Important Notes
 
-View logs:
+* **Production:** Do **not** use Django `runserver` in production.
+* **Security:** Configure `ALLOWED_HOSTS` correctly in `settings.py`.
+* **Proxy:** Use **Nginx** in front of Gunicorn for ports 80/443.
+* **Environment:** Store secrets using environment variables.
 
-docker logs <container_id>
+```
 
-
-Stop container:
-
-docker stop <container_id>
-
-Tech Stack
-
-Django
-
-TensorFlow
-
-XGBoost
-
-Scikit-learn
-
-Gunicorn
-
-Docker
-
-Python 3.11
-
-
-
-
+```
