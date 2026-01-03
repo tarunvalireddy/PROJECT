@@ -1,5 +1,4 @@
 
-```
 # Crypto Price Predictor
 
 This project uses LSTM and XGBoost to predict cryptocurrency prices.
@@ -108,6 +107,3 @@ gunicorn CRYPTO_PRICE_PREDICTION_USING_LSTM_XGBOOST.wsgi:application \
 * **Proxy:** Use **Nginx** in front of Gunicorn for ports 80/443.
 * **Environment:** Store secrets using environment variables.
 
-```
-
-```
