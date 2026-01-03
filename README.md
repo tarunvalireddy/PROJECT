@@ -2,13 +2,14 @@
 ```
 # Crypto Price Predictor
 
-This project uses LSTM and XGBoost to predict cryptocurrency prices. Follow the instructions below to set up the environment and run the application.
+This project uses LSTM and XGBoost to predict cryptocurrency prices.
+Follow the instructions below to set up the environment and run the application.
 
 ## Local Setup
 
 ### 1. Clone the Repository
 ```bash
-git clone <repository-url>
+git clone https://github.com/tarunvalireddy/PROJECT.git
 cd PROJECT
 
 ```
